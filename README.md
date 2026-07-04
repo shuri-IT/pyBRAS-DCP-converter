@@ -90,13 +90,13 @@ OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 2
 
 ## Se aparecer um aviso sobre o formato do vídeo
 
-Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido, você vai ver algo assim antes da conversão começar:
+Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido, você vai ver algo assim antes da conversão começar: <br><br>
 aviso: a origem é 1920x1080; para encaixá-la no quadro retrato exigido de 480x640 sem
 distorcer a imagem, ela será reduzida para apenas 480x270 e receberá tarjas pretas
 (letterbox) — cobrindo somente 42% do quadro.
 O(a) intérprete pode aparecer pequeno(a) e difícil de ver. Considere recortar a origem
 para uma proporção próxima de 3:4 (retrato) antes de codificar.
-
+<br><br>
 **O que isso significa, em português simples:** o vídeo que você recebeu é "deitado" (horizontal) ou tem um formato muito diferente do exigido pelo Canal 15. O programa consegue converter mesmo assim, mas vai colocar tarjas pretas nas bordas para não distorcer a imagem — e dependendo de quão diferente for o formato, o(a) intérprete pode aparecer bem pequeno(a) no resultado final.
 
 Você tem três opções:
