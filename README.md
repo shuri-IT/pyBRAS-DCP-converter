@@ -46,7 +46,7 @@ Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1
 - Um computador (Windows ou Mac).
 - O arquivo do programa: `pyBRAS.py`.
 - O vídeo a ser convertido.
-- Python e FFmpeg instalados (passo a passo abaixo — só precisa fazer isso **uma vez** no computador, nas vezes seguintes você pode começar direto do [Como converter um vídeo — passo a passo](#Como-converter-um-vídeo-—-passo-a-passo).
+- Python e FFmpeg instalados (passo a passo abaixo — só precisa fazer isso **uma vez** no computador, nas vezes seguintes você pode começar direto do [Como converter um vídeo — passo a passo](#como-converter-um-vídeo--passo-a-passo).
 
 ---
 
