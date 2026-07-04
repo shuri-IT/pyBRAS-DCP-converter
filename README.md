@@ -37,14 +37,14 @@ Passos:
 4. Ajuste o fps para **24 fps** e o field order para **progressivo**.
 5. Exporte o vídeo seguindo as specs da timeline em **H.264** com bitrate de **1 Mbps** (1.000 kbps).
 
-Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `encode_slv_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
+Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `pyBRAS.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
 
 ---
 
 ## Requisitos
 
 - Um computador (Windows ou Mac).
-- O arquivo do programa: `encode_slv_wav.py`.
+- O arquivo do programa: `pyBRAS.py`.
 - O vídeo a ser convertido.
 - Python e FFmpeg instalados (passo a passo abaixo — só precisa fazer isso **uma vez** no computador).
 
@@ -78,16 +78,16 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 ## Como converter um vídeo — passo a passo
 
 1. Crie uma pasta nova no seu computador (pode chamar de "Conversao Libras", por exemplo).
-2. Coloque dentro dessa pasta **dois arquivos**: o `encode_slv_wav.py` e o vídeo em Libras que você quer converter (idealmente já preparado conforme a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) acima).
+2. Coloque dentro dessa pasta **dois arquivos**: o `pyBRAS.py` e o vídeo em Libras que você quer converter (idealmente já preparado conforme a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) acima).
 3. Abra o terminal **dentro dessa pasta**:
    - **Windows:** abra a pasta no Explorador de Arquivos, segure Shift e clique com o botão direito em um espaço vazio da pasta, e escolha "Abrir janela do PowerShell aqui" (ou "Abrir no Terminal", dependendo da versão do Windows).
    - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.)
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
    - **Windows:**
- python encode_slv_wav.py video_libras.mp4
+ python pyBRAS.py video_libras.mp4
    - **Mac:**
- python3 encode_slv_wav.py video_libras.mp4
+ python3 pyBRAS.py video_libras.mp4
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
 Codificando video_libras.mp4
@@ -106,7 +106,7 @@ OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 2
 
 ## Se aparecer um aviso sobre o formato do vídeo
 
-Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido — o que não deve acontecer se você seguiu a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) acima — você vai ver algo assim antes da conversão começar:
+Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido — o que não deve acontecer se você seguiu a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) acima — você vai ver algo assim antes da conversão começar:
 aviso: a origem é 1920x1080; para encaixá-la no quadro retrato exigido de 480x640 sem
 distorcer a imagem, ela será reduzida para apenas 480x270 e receberá tarjas pretas
 (letterbox) — cobrindo somente 42% do quadro.
@@ -117,12 +117,12 @@ para uma proporção próxima de 3:4 (retrato) antes de codificar.
 
 Você tem três opções:
 
-1. **Preparar o vídeo em um editor**, seguindo a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) no início deste guia — essa é a melhor opção quando dá tempo e há alguém com acesso a um programa de edição.
+1. **Preparar o vídeo em um editor**, seguindo a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) no início deste guia — essa é a melhor opção quando dá tempo e há alguém com acesso a um programa de edição.
 2. **Conferir antes de decidir**, rodando o comando abaixo — ele não converte nada, só gera uma foto (`.jpg`) mostrando exatamente como vai ficar o quadro final:
-python encode_slv_wav.py video_libras.mp4 --preview
+python pyBRAS.py video_libras.mp4 --preview
    (No Mac, use `python3` em vez de `python`.) Abra a imagem gerada (vai se chamar `video_libras.preview.jpg`, na mesma pasta) para ver se o(a) intérprete ainda está visível o suficiente.
 3. **Seguir em frente mesmo assim**, se o resultado do preview estiver aceitável, adicionando `--force` ao final do comando de conversão:
-python encode_slv_wav.py video_libras.mp4 --force
+python pyBRAS.py video_libras.mp4 --force
 
 Se você rodar o comando normal (sem `--force`) e o terminal perguntar `Continuar mesmo assim, com letterbox pesado? [s/N]:`, digite `s` e aperte Enter para continuar, ou apenas aperte Enter para cancelar.
 
@@ -131,7 +131,7 @@ Se você rodar o comando normal (sem `--force`) e o terminal perguntar `Continua
 ## Conferir se um arquivo `.wav` já pronto está correto
 
 Se você já tem um arquivo `.wav` (gerado por este programa ou recebido de outra pessoa) e quer confirmar que ele está no formato certo, sem gerar um novo:
-python encode_slv_wav.py --check video_libras.wav
+python pyBRAS.py --check video_libras.wav
 
 Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um problema, verá uma linha começando com `FALHOU:` explicando o que está errado.
 
@@ -149,10 +149,10 @@ Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um 
 | `zsh: permission denied: /caminho/da/pasta` logo depois de eu abrir o Terminal | Você arrastou a pasta para o Terminal sem digitar `cd ` antes. Digite `cd ` (com espaço) no início da linha, arraste a pasta de novo (ou digite o caminho manualmente) e aperte Enter. |
 | `erro: ferramenta obrigatória 'ffprobe' não encontrada no PATH` | O FFmpeg não foi instalado corretamente — o `ffprobe` vem junto com ele. Reinstale o FFmpeg. |
 | `erro: [arquivo] já existe, abortando` | Já existe um `.wav` com esse nome nessa pasta. Apague-o, renomeie-o, ou rode o comando de novo usando `-o outronome.wav` para escolher outro nome de saída. |
-| `erro: [arquivo]: arquivo não encontrado` | O nome do vídeo foi digitado errado, ou o vídeo não está na mesma pasta que o `encode_slv_wav.py`. Confira o nome exato do arquivo (no Windows, ative "mostrar extensões de arquivo" nas opções do Explorador de Arquivos para ver o `.mp4` no fim do nome). |
+| `erro: [arquivo]: arquivo não encontrado` | O nome do vídeo foi digitado errado, ou o vídeo não está na mesma pasta que o `pyBRAS.py`. Confira o nome exato do arquivo (no Windows, ative "mostrar extensões de arquivo" nas opções do Explorador de Arquivos para ver o `.mp4` no fim do nome). |
 | `erro: a origem tem [x]s de duração, menos que um bloco de 2s` | O vídeo é curto demais (menos de 2 segundos). Use um vídeo mais longo. |
 | `erro: [arquivo] não contém nenhuma trilha de vídeo (ou o arquivo está corrompido/ilegível)` | O arquivo enviado não é um vídeo válido, ou está corrompido. Peça o arquivo novamente para quem enviou. |
-| Aparece um `aviso:` sobre "letterbox" e uma pergunta `[s/N]` | O vídeo não está no formato vertical esperado. Veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) acima — ou faça a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) da próxima vez para evitar esse aviso. |
+| Aparece um `aviso:` sobre "letterbox" e uma pergunta `[s/N]` | O vídeo não está no formato vertical esperado. Veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) acima — ou faça a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) da próxima vez para evitar esse aviso. |
 | A tela fica "travada" por um tempo | É normal em vídeos longos — apenas espere. Só se preocupe se passarem muitos minutos sem nenhuma mudança. |
 | Aparece `Sucesso!` mas depois `FALHOU:` | A conversão terminou mas a checagem final encontrou um problema no arquivo gerado. Tente rodar de novo; se persistir, guarde a mensagem completa de erro para pedir ajuda. |
 
