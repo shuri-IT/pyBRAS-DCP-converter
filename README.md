@@ -1,5 +1,5 @@
 # pyBRAS-DCP-converter
-Este programa transforma um vídeo em um arquivo de áudio especial (wav) que pode ser usado no Canal 15 de um DCP.
+Este programa transforma um vídeo em um arquivo de áudio especial (wav) que pode ser usado no Canal 15 de um DCP. Concebido para a inclusão do canal de LIBRAS.
 
 
 # Guia Fácil: Conversor de Vídeo para o Canal 15 (Vídeo em Língua de Sinais)
