@@ -39,8 +39,6 @@ Passos:
 
 Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `encode_slv_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
 
-> **Se você não tem acesso a um programa de edição:** sem problema — pule esta etapa e vá direto para o Passo 1. O `encode_slv_wav.py` faz os ajustes de resolução e taxa de quadros automaticamente. A única diferença é que, se o vídeo original estiver muito longe da proporção 480×640, o programa pode precisar reduzir bastante a imagem e colocar tarjas pretas nas bordas — veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) mais abaixo.
-
 ---
 
 ## Requisitos
