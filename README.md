@@ -68,9 +68,9 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
    - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.)
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
-   - **Windows:**
+   - **Windows:** <br>
  python encode_slv_wav.py video_libras.mp4
-   - **Mac:**
+   - **Mac:** <br>
  python3 encode_slv_wav.py video_libras.mp4
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
