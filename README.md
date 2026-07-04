@@ -11,6 +11,15 @@ Este guia foi revisado com a ajuda de **[Eduardo Pires de Vasconcelos](https://w
 
 ---
 
+## Verificação de segurança
+
+O arquivo `pyBRAS_conversor_libras_wav.py` foi verificado no [VirusTotal](https://www.virustotal.com), que analisa o arquivo com dezenas de antivírus diferentes ao mesmo tempo.
+
+- **Resultado:** [0/62 — nenhum antivírus identificou o arquivo como malicioso](https://www.virustotal.com/gui/file/15268e25213cf54b5e546318bb92426e0dce0e7543eea6a7fb190d8dcf2efa23/detection)
+- **SHA256 do arquivo verificado:** `15268e25213cf54b5e546318bb92426e0dce0e7543eea6a7fb190d8dcf2efa23`
+
+> Este selo é válido apenas para a versão exata do arquivo com o hash acima (a v1.2.4). Se o `pyBRAS_conversor_libras_wav.py` for atualizado no futuro, uma nova verificação deve ser feita e o link/hash acima atualizado.
+
 ## O que esse programa faz, em resumo
 
 Você tem um vídeo com um(a) intérprete de Libras. O programa converte esse vídeo em um arquivo `.wav` especial, que **não é um áudio normal** — é um vídeo disfarçado de áudio, para que dispositivos de acessibilidade dos cinemas consigam exibir LIBRAS junto com o filme.
