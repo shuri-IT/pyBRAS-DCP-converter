@@ -151,7 +151,7 @@ Se você rodar o comando normal (sem `--force`) e o terminal perguntar `Continua
 ## Conferir se um arquivo `.wav` já pronto está correto
 
 Se você já tem um arquivo `.wav` (gerado por este programa ou recebido de outra pessoa) e quer confirmar que ele está no formato certo, sem gerar um novo:
-python pyBRAS_conversor_libras_wav.py --check video_libras.wav
+<br> <br> python pyBRAS_conversor_libras_wav.py --check video_libras.wav
 
 Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um problema, verá uma linha começando com `FALHOU:` explicando o que está errado.
 
