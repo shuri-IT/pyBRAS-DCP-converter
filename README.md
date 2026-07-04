@@ -52,7 +52,7 @@ winget install ffmpeg
 
 2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter: <br><br>
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-3. Depois que terminar, instale o Python e o FFmpeg com:
+3. Depois que terminar, instale o Python e o FFmpeg com: <br><br>
 brew install python ffmpeg
 
 Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#solução-de-problemas) no fim deste guia.
