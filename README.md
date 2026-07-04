@@ -85,6 +85,74 @@ Passos:
 
 Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `pyBRAS_conversor_libras_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
 
+> Não tem acesso a nenhum programa de edição? Você tem duas saídas: seguir direto para o [passo a passo de conversão](#como-converter-um-vídeo--passo-a-passo) (o conversor dá conta de resolução e fps sozinho, avisando se o enquadramento ficar ruim), ou testar o preparador automático experimental abaixo.
+
+<details>
+<summary>🧪 <strong>Experimental</strong> — Etapa 0 automática, sem editor (clique para abrir)</summary>
+
+<br>
+
+> **Aviso:** este recurso é **experimental**. Ele funciona bem nos casos comuns, mas é um ajuste automático — não substitui o olho de um(a) finalizador(a). Se algo sair estranho, volte para a Etapa 0 manual acima ou siga direto para o conversor (que também funciona sem esta etapa). **Sempre confira o resultado com `--preview` antes de converter.**
+
+Se você não tem acesso a um programa de edição (ou não tem tempo), o script `pyBRAS_preparador_video.py` faz uma versão automática da Etapa 0. Ele:
+
+1. **Encontra o(a) intérprete no quadro sozinho** — mesmo que ele(a) não esteja centralizado(a). Se o vídeo tem fundo verde/azul, a silhueta sobre o chroma é usada para localizar a pessoa; se não tem, o programa observa **onde há movimento** ao longo do vídeo (as mãos e o rosto de quem sinaliza se movem, o resto não) e recorta ao redor dessa área.
+2. **Recorta em 3:4 (retrato)** ao redor do(a) intérprete, com uma folga de segurança, incluindo o alcance completo das mãos ao longo do vídeo inteiro — não só de um momento.
+3. **Remove o chroma key automaticamente** (detecta se o fundo é verde ou azul e qual o tom exato) e coloca um fundo preto sólido no lugar.
+4. **Exporta já no formato certo**: 480×640, 24 fps progressivo, H.264 a 1 Mbps, sem áudio — pronto para entrar direto no `pyBRAS_conversor_libras_wav.py`, sem nenhum aviso de letterbox.
+
+**Limite importante:** o script assume que o(a) intérprete **não anda pelo quadro** (pode gesticular à vontade, só não pode mudar de lugar).
+
+**Como usar** — coloque o `pyBRAS_preparador_video.py` na mesma pasta do vídeo e rode (no Mac, use `python3` em vez de `python`):
+
+    python pyBRAS_preparador_video.py video_bruto.mp4 --preview
+
+Isso **não converte nada ainda** — gera duas fotos na pasta:
+
+- `video_bruto_preparado.preview.jpg`: como vai ficar o quadro final;
+- `video_bruto_deteccao.jpg`: o vídeo original com um retângulo vermelho mostrando a área que o programa decidiu recortar.
+
+Se o retângulo estiver bem posicionado ao redor do(a) intérprete, rode de novo sem o `--preview`:
+
+    python pyBRAS_preparador_video.py video_bruto.mp4
+
+Vai aparecer algo assim:
+
+    Analisando video_bruto.mp4 (1920x1080, 95.0s)
+      chroma key:       fundo verde detectado (cor média 0x1EA33A) — será removido e substituído por preto
+      intérprete:       localizado por silhueta sobre o chroma (ocupa ~34% da largura do quadro original)
+      recorte 3:4:      810x1080 em x=112, y=0
+      saída:            480x640, 24 fps, H.264 @ 1000kbps, sem áudio
+
+    Sucesso! video_bruto_preparado.mp4 foi gravado — use este arquivo como entrada do pyBRAS_conversor_libras_wav.py
+    OK: video_bruto_preparado.mp4 — h264 480x640 @ 24/1 fps
+
+O arquivo `video_bruto_preparado.mp4` é o que você usa no [passo a passo de conversão](#como-converter-um-vídeo--passo-a-passo).
+
+**Ajustes (só se precisar):**
+
+| Opção | Para que serve |
+| --- | --- |
+| `--preview` | Gera só as duas fotos de conferência, sem codificar o vídeo. |
+| `--chroma verde` / `--chroma azul` / `--chroma nao` | Força a cor do chroma, ou desativa a remoção (`nao`) se o programa detectar errado. |
+| `--similaridade 0.15` | Aumente (até ~0.3) se sobrar borda verde ao redor da pessoa; diminua (até ~0.05) se partes da pessoa estiverem "sumindo". Padrão: 0.10. |
+| `--margem 0.15` | Folga extra ao redor da área detectada (padrão 0.10 = 10%). Aumente se as mãos estiverem encostando na borda do recorte. |
+| `--crop L:A:X:Y` | Pula a detecção e recorta manualmente (largura:altura:x:y, em pixels do vídeo original). Use se a detecção automática errar. |
+| `--amostras 24` | Analisa mais frames ao longo do vídeo (padrão 12). Ajuda se as mãos alcançam posições extremas só em momentos raros. |
+| `-o nome.mp4` | Escolhe o nome do arquivo de saída. |
+
+**Problemas comuns do preparador:**
+
+| Mensagem / sintoma | O que fazer |
+| --- | --- |
+| `erro: não foi possível localizar o(a) intérprete automaticamente` | O vídeo tem pouco movimento nas amostras analisadas (ou pouco contraste com o fundo). Tente `--amostras 24`, ou defina o recorte na mão com `--crop`. |
+| O retângulo vermelho do `--preview` cortou uma das mãos | As mãos só chegam naquela posição em momentos que não foram amostrados. Rode com `--amostras 24` e/ou `--margem 0.15`. |
+| Sobrou uma borda verde ao redor da pessoa | Aumente `--similaridade` aos poucos (0.15, 0.20…) e confira com `--preview` a cada tentativa. |
+| Partes da roupa/pele ficaram pretas ou transparentes | A roupa tem tom parecido com o chroma. Diminua `--similaridade` (0.07, 0.05). Se não resolver, esse vídeo precisa de keying manual em um editor (Etapa 0 manual acima). |
+| O fundo não é verde/azul e apareceu no resultado | Sem chroma não há como remover o fundo automaticamente — o recorte funciona, mas o fundo original é mantido. Se um fundo preto for necessário, grave com chroma ou faça a Etapa 0 manual. |
+
+</details>
+
 ---
 
 ## Requisitos
