@@ -90,7 +90,13 @@ Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1
 - Um computador (Windows ou Mac).
 - O arquivo do programa: `pyBRAS_conversor_libras_wav.py`.
 - O vídeo a ser convertido.
-- Python e FFmpeg instalados (passo a passo abaixo — só precisa fazer isso **uma vez** no computador, nas vezes seguintes você pode começar direto do [Como converter um vídeo — passo a passo](#como-converter-um-vídeo--passo-a-passo)).
+- Python e FFmpeg instalados (passo a passo abaixo — só precisa fazer isso **uma vez**
+  no computador, nas vezes seguintes você pode começar direto do
+  [Como converter um vídeo — passo a passo](#como-converter-um-vídeo--passo-a-passo)).
+  O FFmpeg precisa ser a versão 3.2.4 ou mais nova, com suporte a `libvpx-vp9` e ao
+  muxer `webm_chunk` — as instalações feitas pelos comandos deste guia (winget e
+  Homebrew) já vêm com tudo isso. Só se preocupe com esse detalhe se você instalar
+  o FFmpeg por outro caminho (Linux, conda, builds "mínimos" etc.).
 
 ---
 
