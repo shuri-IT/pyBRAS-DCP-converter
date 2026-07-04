@@ -67,7 +67,7 @@ MIN_FRAME_COVERAGE = 0.70
 
 def require_tool(name: str) -> None:
     if shutil.which(name) is None:
-        sys.exit(f"error: required tool '{name}' not found on PATH")
+        sys.exit(f"erro: ferramenta obrigatória '{name}' não encontrada no PATH")
 
 
 def probe_duration_secs(input_path: Path) -> float:
@@ -180,7 +180,7 @@ def encode_vp9_chunks(input_path: Path, build_dir: Path, chunk_len_frames: int) 
     subprocess.run(cmd, check=True)
 
     if not header_path.exists():
-        sys.exit("error: ffmpeg did not produce a VP9/EBML header file")
+        sys.exit("erro: o ffmpeg não gerou o arquivo de cabeçalho VP9/EBML")
     return header_path
 
 
@@ -192,7 +192,7 @@ def build_pcm_blocks(build_dir: Path, ebml_header: bytes, chunk_len_bytes: int) 
 
     chunk_files = sorted(build_dir.glob("chunk_*.chk"))
     if not chunk_files:
-        sys.exit("error: no VP9 segment chunks were produced")
+        sys.exit("erro: nenhum segmento VP9 foi gerado")
 
     with open(raw_pcm_path, "wb") as out:
         for chunk_file in chunk_files:
@@ -202,16 +202,16 @@ def build_pcm_blocks(build_dir: Path, ebml_header: bytes, chunk_len_bytes: int) 
 
             if BLOCK_HEADER_LEN + le + lv > lb:
                 sys.exit(
-                    f"error: {chunk_file.name} segment ({lv} bytes) + EBML header "
-                    f"({le} bytes) exceeds block size ({lb} bytes). "
-                    f"Increase --chunk-duration or lower the VP9 bitrate."
+                    f"erro: o segmento {chunk_file.name} ({lv} bytes) + cabeçalho EBML "
+                    f"({le} bytes) excede o tamanho do bloco ({lb} bytes). "
+                    f"Aumente --chunk-duration ou reduza o bitrate do VP9."
                 )
 
             block_header = struct.pack(">IIIII", MARKER, lv, lb, le, MARKER)
             padding = b"\x00" * (lb - lv - le - BLOCK_HEADER_LEN)
             block = block_header + ebml_header + vp9_seg + padding
 
-            assert len(block) == lb, "constructed PCM block has the wrong length"
+            assert len(block) == lb, "bloco PCM construído com tamanho incorreto"
             out.write(block)
 
     return raw_pcm_path
@@ -256,7 +256,7 @@ def read_riff_chunks(data: bytes):
     sub-chunk after the 12-byte RIFF/WAVE preamble. Chunks are word-aligned
     per the RIFF spec, so odd-sized chunks are followed by a pad byte."""
     if data[0:4] != b"RIFF" or data[8:12] != b"WAVE":
-        raise ValueError("not a RIFF/WAVE file")
+        raise ValueError("não é um arquivo RIFF/WAVE válido")
     pos = 12
     while pos + 8 <= len(data):
         chunk_id = data[pos:pos + 4]
@@ -276,12 +276,12 @@ def validate_wav(wav_path: Path, chunk_duration: float) -> None:
     WAVE_FORMAT_EXTENSIBLE fmt chunks and extra chunks (e.g. LIST/INFO)
     before 'data'."""
     if not wav_path.exists():
-        sys.exit(f"error: {wav_path}: no such file")
+        sys.exit(f"erro: {wav_path}: arquivo não encontrado")
 
     data = wav_path.read_bytes()
 
     def fail(msg: str) -> None:
-        sys.exit(f"FAIL: {msg}")
+        sys.exit(f"FALHOU: {msg}")
 
     try:
         chunks = list(read_riff_chunks(data))
@@ -293,13 +293,13 @@ def validate_wav(wav_path: Path, chunk_duration: float) -> None:
     data_chunk = next((c for c in chunks if c[0] == b"data"), None)
 
     if fmt_chunk is None:
-        fail("no 'fmt ' chunk found")
+        fail("nenhum bloco 'fmt ' encontrado")
     if data_chunk is None:
-        fail("no 'data' chunk found")
+        fail("nenhum bloco 'data' encontrado")
 
     _, fmt_off, fmt_size = fmt_chunk
     if fmt_size < 16:
-        fail(f"'fmt ' chunk is only {fmt_size} bytes, expected at least 16")
+        fail(f"o bloco 'fmt ' tem apenas {fmt_size} bytes, esperado no mínimo 16")
 
     audio_format = struct.unpack("<H", data[fmt_off:fmt_off + 2])[0]
     channels = struct.unpack("<H", data[fmt_off + 2:fmt_off + 4])[0]
@@ -307,11 +307,11 @@ def validate_wav(wav_path: Path, chunk_duration: float) -> None:
     bits_per_sample = struct.unpack("<H", data[fmt_off + 14:fmt_off + 16])[0]
 
     if audio_format not in (WAVE_FORMAT_PCM, WAVE_FORMAT_EXTENSIBLE):
-        fail(f"audio format code is 0x{audio_format:04X}, expected PCM (1) or EXTENSIBLE (0xFFFE)")
+        fail(f"código de formato de áudio é 0x{audio_format:04X}, esperado PCM (1) ou EXTENSIBLE (0xFFFE)")
     if (sample_rate, bits_per_sample, channels) != (SAMPLE_RATE, BITS_PER_SAMPLE, CHANNELS):
         fail(
-            f"format is {sample_rate} Hz / {bits_per_sample}-bit / {channels}ch, "
-            f"expected {SAMPLE_RATE} Hz / {BITS_PER_SAMPLE}-bit / {CHANNELS}ch"
+            f"formato é {sample_rate} Hz / {bits_per_sample}-bit / {channels} canal(is), "
+            f"esperado {SAMPLE_RATE} Hz / {BITS_PER_SAMPLE}-bit / {CHANNELS} canal(is)"
         )
 
     _, data_off, declared_size = data_chunk
@@ -324,52 +324,53 @@ def validate_wav(wav_path: Path, chunk_duration: float) -> None:
 
     if len(pcm) % block_len != 0:
         fail(
-            f"PCM data ({len(pcm)} bytes) is not a whole number of "
-            f"{block_len}-byte blocks (remainder {len(pcm) % block_len})"
+            f"os dados PCM ({len(pcm)} bytes) não formam um número inteiro de "
+            f"blocos de {block_len} bytes (resto de {len(pcm) % block_len})"
         )
 
     num_blocks = len(pcm) // block_len
     if num_blocks == 0:
-        fail("no PCM blocks found")
+        fail("nenhum bloco PCM encontrado")
 
     for i in range(num_blocks):
         block = pcm[i * block_len : (i + 1) * block_len]
         h1, lv, lb, le, h2 = struct.unpack(">IIIII", block[:20])
         if h1 != MARKER or h2 != MARKER:
-            fail(f"block {i}: missing 0xFFFFFFFF marker(s)")
+            fail(f"bloco {i}: marcador(es) 0xFFFFFFFF ausente(s)")
         if lb != block_len:
-            fail(f"block {i}: Lb={lb}, expected {block_len}")
+            fail(f"bloco {i}: Lb={lb}, esperado {block_len}")
         if BLOCK_HEADER_LEN + le + lv > lb:
-            fail(f"block {i}: Le+Lv+20 ({BLOCK_HEADER_LEN + le + lv}) exceeds Lb ({lb})")
+            fail(f"bloco {i}: Le+Lv+20 ({BLOCK_HEADER_LEN + le + lv}) excede Lb ({lb})")
 
+    canal_label = "canal" if channels == 1 else "canais"
     print(
-        f"OK: {wav_path.name} — {num_blocks} block(s) x {block_len} bytes, "
-        f"~{num_blocks * chunk_duration:g}s of video, "
-        f"{sample_rate} Hz / {bits_per_sample}-bit / {channels}ch PCM"
+        f"OK: {wav_path.name} — {num_blocks} bloco(s) de {block_len} bytes, "
+        f"~{num_blocks * chunk_duration:g}s de vídeo, "
+        f"{sample_rate} Hz / {bits_per_sample}-bit / {channels} {canal_label} PCM"
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Encode a video into a DCP channel 15 (Sign Language Video) PCM WAV file."
+        description="Codifica um vídeo em um arquivo WAV PCM para o canal 15 de áudio do DCP (Sign Language Video)."
     )
-    parser.add_argument("input", type=Path, help="source video file")
+    parser.add_argument("input", type=Path, help="arquivo de vídeo de origem")
     parser.add_argument("-o", "--output", type=Path, default=None,
-                         help="output .wav path (default: <input>.wav)")
+                         help="caminho do .wav de saída (padrão: <entrada>.wav)")
     parser.add_argument("-c", "--chunk-duration", type=float, default=2.0,
-                         help="seconds of audio/VP9 per block (default: 2.0, per spec)")
+                         help="segundos de áudio/VP9 por bloco (padrão: 2.0, conforme a norma)")
     parser.add_argument("--check", action="store_true",
-                         help="don't encode; instead validate that 'input' (a .wav) "
-                              "conforms to the ISDCF Doc13 block structure")
+                         help="não codifica; em vez disso, valida se 'input' (um .wav) "
+                              "está de acordo com a estrutura de blocos do ISDCF Doc13")
     parser.add_argument("--no-validate", action="store_true",
-                         help="skip the automatic self-check after encoding")
+                         help="pula a autoverificação automática após a codificação")
     parser.add_argument("--preview", nargs="?", const="__default__", default=None,
-                         help="write a single letterboxed preview frame (.jpg) instead of "
-                              "encoding, so you can eyeball the framing first. Optional path; "
-                              "defaults to <input>.preview.jpg")
+                         help="grava um único frame de pré-visualização com letterbox (.jpg) em vez de "
+                              "codificar, para você conferir o enquadramento antes. Caminho opcional; "
+                              "padrão: <entrada>.preview.jpg")
     parser.add_argument("--force", action="store_true",
-                         help="proceed even if the source's aspect ratio would result in "
-                              "heavy letterboxing (skips the interactive confirmation)")
+                         help="prossegue mesmo que a proporção da imagem de origem resulte em "
+                              "letterbox pesado (pula a confirmação interativa)")
     args = parser.parse_args()
 
     require_tool("ffmpeg")
@@ -381,7 +382,7 @@ def main() -> None:
 
     if args.preview is not None:
         if not args.input.exists():
-            sys.exit(f"error: {args.input}: no such file")
+            sys.exit(f"erro: {args.input}: arquivo não encontrado")
         preview_path = (
             args.input.with_suffix(".preview.jpg")
             if args.preview == "__default__"
@@ -392,54 +393,54 @@ def main() -> None:
         if has_video:
             coverage = letterbox_coverage(w, h)
             print(
-                f"Wrote preview frame: {preview_path}\n"
-                f"  source: {w}x{h} (rotation-adjusted)\n"
-                f"  frame coverage after letterboxing: {coverage:.0%}"
+                f"Frame de pré-visualização salvo em: {preview_path}\n"
+                f"  origem: {w}x{h} (já ajustado por rotação)\n"
+                f"  cobertura do quadro após o letterbox: {coverage:.0%}"
             )
         else:
-            print(f"Wrote preview frame: {preview_path}")
+            print(f"Frame de pré-visualização salvo em: {preview_path}")
         return
 
     if not args.input.exists():
-        sys.exit(f"error: {args.input}: no such file")
+        sys.exit(f"erro: {args.input}: arquivo não encontrado")
 
     output_path = args.output or args.input.with_suffix(".wav")
     if output_path.exists():
-        sys.exit(f"error: {output_path} already exists, aborting")
+        sys.exit(f"erro: {output_path} já existe, abortando")
 
     duration = probe_duration_secs(args.input)
     if duration and duration < args.chunk_duration:
         sys.exit(
-            f"error: source is {duration:.2f}s long, shorter than one "
-            f"{args.chunk_duration:g}s chunk. Need at least one full chunk to encode."
+            f"erro: a origem tem {duration:.2f}s de duração, menos que um "
+            f"bloco de {args.chunk_duration:g}s. É necessário pelo menos um bloco completo para codificar."
         )
 
     w, h, has_video = probe_video_geometry(args.input)
     if not has_video:
-        sys.exit(f"error: {args.input} contains no video stream")
+        sys.exit(f"erro: {args.input} não contém nenhuma trilha de vídeo (ou o arquivo está corrompido/ilegível)")
 
     coverage = letterbox_coverage(w, h)
     if coverage < MIN_FRAME_COVERAGE and not args.force:
         letterboxed_w = round(w * min(FORCED_WIDTH / w, FORCED_HEIGHT / h))
         letterboxed_h = round(h * min(FORCED_WIDTH / w, FORCED_HEIGHT / h))
         warning = (
-            f"\nwarning: source is {w}x{h}; fitting it into the required "
-            f"{FORCED_WIDTH}x{FORCED_HEIGHT} portrait frame without distortion means "
-            f"it will be scaled to only {letterboxed_w}x{letterboxed_h} and letterboxed "
-            f"with black bars — covering just {coverage:.0%} of the frame.\n"
-            f"The interpreter may appear small and hard to see. Consider re-cropping the "
-            f"source to roughly a 3:4 portrait ratio before encoding.\n"
-            f"Run with --preview to see exactly what the output frame will look like.\n"
+            f"\naviso: a origem é {w}x{h}; para encaixá-la no quadro retrato exigido de "
+            f"{FORCED_WIDTH}x{FORCED_HEIGHT} sem distorcer a imagem, ela será reduzida para "
+            f"apenas {letterboxed_w}x{letterboxed_h} e receberá tarjas pretas (letterbox) — "
+            f"cobrindo somente {coverage:.0%} do quadro.\n"
+            f"O(a) intérprete pode aparecer pequeno(a) e difícil de ver. Considere recortar a "
+            f"origem para uma proporção próxima de 3:4 (retrato) antes de codificar.\n"
+            f"Use --preview para ver exatamente como ficará o quadro de saída.\n"
         )
         print(warning, file=sys.stderr)
         if sys.stdin.isatty():
-            answer = input("Continue anyway with heavy letterboxing? [y/N]: ").strip().lower()
-            if answer != "y":
-                sys.exit("Aborted. Re-run with --force to skip this prompt once you're sure.")
+            answer = input("Continuar mesmo assim, com letterbox pesado? [s/N]: ").strip().lower()
+            if answer not in ("s", "y"):
+                sys.exit("Cancelado. Rode novamente com --force para pular esta confirmação quando tiver certeza.")
         else:
             sys.exit(
-                "error: refusing to proceed non-interactively with heavy letterboxing. "
-                "Re-run with --force once you've confirmed this is acceptable."
+                "erro: recusando prosseguir de forma não interativa com letterbox pesado. "
+                "Rode novamente com --force assim que confirmar que isso é aceitável."
             )
 
     chunk_len_frames = round(args.chunk_duration * FORCED_FPS)
@@ -447,10 +448,10 @@ def main() -> None:
     chunk_len_bytes = int(bytes_per_second * args.chunk_duration)
 
     print(
-        f"Encoding {args.input.name}\n"
-        f"  forced video:  {FORCED_FPS} fps, {FORCED_WIDTH}x{FORCED_HEIGHT}, VP9 @ {VIDEO_BITRATE_BPS} bps\n"
-        f"  block length:  {args.chunk_duration:g}s = {chunk_len_frames} frames = {chunk_len_bytes} bytes\n"
-        f"  output PCM:    {BITS_PER_SAMPLE}-bit / {SAMPLE_RATE} Hz / {CHANNELS} channel\n"
+        f"Codificando {args.input.name}\n"
+        f"  vídeo forçado:      {FORCED_FPS} fps, {FORCED_WIDTH}x{FORCED_HEIGHT}, VP9 @ {VIDEO_BITRATE_BPS} bps\n"
+        f"  duração do bloco:   {args.chunk_duration:g}s = {chunk_len_frames} frames = {chunk_len_bytes} bytes\n"
+        f"  PCM de saída:       {BITS_PER_SAMPLE}-bit / {SAMPLE_RATE} Hz / {CHANNELS} canal\n"
     )
 
     with tempfile.TemporaryDirectory(prefix="slv_encode_") as build_dir_str:
@@ -458,12 +459,12 @@ def main() -> None:
 
         header_path = encode_vp9_chunks(args.input, build_dir, chunk_len_frames)
         ebml_header = header_path.read_bytes()
-        header_path.unlink()  # don't let it get swept up by the chunk_*.chk glob
+        header_path.unlink()  # não deixar ser pego pelo glob de chunk_*.chk
 
         raw_pcm_path = build_pcm_blocks(build_dir, ebml_header, chunk_len_bytes)
         wrap_as_wav(raw_pcm_path, output_path)
 
-    print(f"Success! Wrote {output_path} (use this file for DCP audio channel 15)")
+    print(f"Sucesso! {output_path} foi gravado (use este arquivo no canal 15 de áudio do DCP)")
 
     if not args.no_validate:
         validate_wav(output_path, args.chunk_duration)
