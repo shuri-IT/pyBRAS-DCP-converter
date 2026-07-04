@@ -35,7 +35,7 @@ Passos:
 1. Abra o arquivo de vídeo do(a) intérprete de Libras no seu programa de edição.
 2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo agora e substitua por um fundo sólido (geralmente preto) — o Canal 15 não usa transparência.
 3. Ajuste a resolução de exportação para **480×640** (retrato), enquadrando o(a) intérprete manualmente dentro desse quadro. Fazer isso manualmente evita que o conversor precise reduzir a imagem e adicionar tarjas pretas (letterbox) ou cortar a imagem automaticamente depois.
-4. Ajuste a taxa de quadros para **24 fps progressivo** (às vezes chamado de "24p").
+4. Ajuste o fps para 24 fps e o field order para progressivo.
 5. Exporte o vídeo em **H.264** com bitrate de aproximadamente **1 Mbps** (1.000 kbps).
 
 Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `encode_slv_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
