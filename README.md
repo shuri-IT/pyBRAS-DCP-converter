@@ -94,14 +94,8 @@ Este programa transforma um vídeo em um arquivo de áudio especial (wav) que po
 
 | Mensagem | Solução |
 | --- | --- |
-| 'python' não é reconhecido | Reinstale e marque a caixinha "Add Python to PATH".
-
- |
-| 'ffmpeg' não é reconhecido | Feche e abra o terminal de novo. Se persistir, reinstale o FFmpeg.
-
- |
-| already exists, aborting | Já existe um arquivo .wav com esse nome na pasta. Apague-o ou renomeie, e rode o comando de novo.
-
- |
-| A tela fica "travada" por um tempo | É normal em vídeos longos - só esperar.
+| 'python' não é reconhecido | Reinstale e marque a caixinha "Add Python to PATH". |
+| 'ffmpeg' não é reconhecido | Feche e abra o terminal de novo. Se persistir, reinstale o FFmpeg. |
+| already exists, aborting | Já existe um arquivo .wav com esse nome na pasta. Apague-o ou renomeie, e rode o comando de novo. |
+| A tela fica "travada" por um tempo | É normal em vídeos longos - só esperar. |
  
