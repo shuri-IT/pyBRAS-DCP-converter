@@ -27,7 +27,8 @@ Isso é importante e evita retrabalho depois.
 
 ## Etapa 0 (recomendada): preparar o vídeo em um editor antes de converter
 
-Se você (ou a pessoa que editou o vídeo) tem acesso a um programa de edição de vídeo (Premiere, DaVinci Resolve, Filmora, CapCut etc.), o resultado final fica melhor e com mais controle se o vídeo já for preparado **antes** de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é **fortemente recomendada** — o script consegue ajustar resolução e taxa de quadros sozinho — mas é o caminho ideal para quem já edita vídeo, porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
+O resultado final fica melhor e com mais controle se o vídeo já for preparado **antes** de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é **fortemente recomendada** — o script consegue ajustar resolução e taxa de quadros sozinho — porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
+O resultado final ficará melhor e com mais controle se o vídeo já for preparado antes de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é fortemente recomendada — o script consegue ajustar resolução e taxa de quadros sozinho —, porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
 
 Passos:
 
