@@ -27,6 +27,8 @@ Você **não precisa saber programar** para usar este programa. Este guia foi es
   - [Como o vídeo VP9 é escondido dentro do WAV](#como-o-vídeo-vp9-é-escondido-dentro-do-wav)
   - [Duas abordagens comuns para implementar essa norma](#duas-abordagens-comuns-para-implementar-essa-norma)
   - [Recapitulando os parâmetros técnicos deste script](#recapitulando-os-parâmetros-técnicos-deste-script)
+- [Ajuda e problemas](#ajuda-e-problemas)
+- [Licença](#licença)
 
 
 ## Créditos
