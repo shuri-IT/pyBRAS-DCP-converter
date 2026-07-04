@@ -104,4 +104,4 @@ Este programa transforma um vídeo em um arquivo de áudio especial (wav) que po
 
  |
 | A tela fica "travada" por um tempo | É normal em vídeos longos - só esperar.
- |
+ 
