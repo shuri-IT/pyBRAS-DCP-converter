@@ -25,18 +25,17 @@ Isso é importante e evita retrabalho depois.
 
 ---
 
-## Etapa 0 (recomendada): preparar o vídeo em um editor antes de converter
+## Etapa 0 (recomendada): preparar o vídeo em um software de edição (Premiere, DaVinci Resolve, After Effects, Media Composer, etc) antes de converter
 
-O resultado final fica melhor e com mais controle se o vídeo já for preparado **antes** de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é **fortemente recomendada** — o script consegue ajustar resolução e taxa de quadros sozinho — porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
-O resultado final ficará melhor e com mais controle se o vídeo já for preparado antes de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é fortemente recomendada — o script consegue ajustar resolução e taxa de quadros sozinho —, porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
+O resultado final ficará melhor e com mais controle se o vídeo já for preparado antes de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é **fortemente recomendada** — o script consegue ajustar resolução e taxa de quadros sozinho —, porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
 
 Passos:
 
 1. Abra o arquivo de vídeo do(a) intérprete de Libras no seu programa de edição.
-2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo com efeitos do programa (3D Keyer no DaVinci, Color Key no Premiere) e adicione um fundo sólido preto na track anterior ao da track da Libras (ex. track 1 com o sólido e track 2 com intérprete de LIBRAS já sem o chroma).
-3. Ajuste a resolução de timeline para **480×640**, enquadrando o(a) intérprete manualmente dentro desse quadro. Fazer isso manualmente evita que o conversor precise reduzir a imagem e adicionar tarjas pretas (letterbox) ou cortar a imagem automaticamente depois.
-4. Ajuste o fps para 24 fps e o field order para progressivo.
-5. Exporte o vídeo em **H.264** com bitrate de aproximadamente **1 Mbps** (1.000 kbps).
+2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo com efeitos do programa (3D Keyer no DaVinci, Color Key no Premiere) e adicione um fundo sólido preto na track anterior à track da Libras (ex. track 1 com o sólido e track 2 com o(a) intérprete de Libras já sem o chroma).
+3. Ajuste a resolução da timeline para **480×640**, enquadrando o(a) intérprete manualmente dentro desse quadro. Fazer isso manualmente evita que o conversor precise reduzir a imagem e adicionar tarjas pretas (letterbox/pillarbox) ou cortar a imagem automaticamente depois.
+4. Ajuste o fps para **24 fps** e o field order para **progressivo**.
+5. Exporte o vídeo seguindo as specs da timeline em **H.264** com bitrate de **1 Mbps** (1.000 kbps).
 
 Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `encode_slv_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
 
