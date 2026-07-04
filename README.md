@@ -266,6 +266,7 @@ Este programa é, na prática, uma reimplementação em Python do encoder de ref
 | Amostragem PCM | 48.000 Hz | 96 kHz é **proibido** pela norma para este canal. |
 | Profundidade PCM | 24-bit | — |
 | Canais PCM | 1 (mono) | — |
+| Keyframes | 1 por chunk, no início | O script força um keyframe VP9 em cada limite de chunk (`-g` = `keyint_min` = frames por chunk), garantindo que cada bloco PCM seja decodificável de forma independente. |
 
 ### Como o vídeo VP9 é escondido dentro do WAV
 
