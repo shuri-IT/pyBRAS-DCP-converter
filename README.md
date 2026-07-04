@@ -66,7 +66,7 @@ Este programa transforma um vídeo em um arquivo de áudio especial (wav) que po
 
 
 
-1. Crie uma pasta nova e insira nela o arquivo `encode_slv_wav.py` e o vídeo.
+1. Crie uma pasta nova e insira nela o arquivo `encode_slv_wav.py` e o vídeo em LIBRAS à ser convertido.
 
 
 2. Abra o terminal ou Prompt de Comando dentro dessa pasta.
