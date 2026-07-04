@@ -175,8 +175,8 @@ para uma proporção próxima de 3:4 (retrato) antes de codificar.
 Você tem três opções:
 
 1. **Preparar o vídeo em um editor**, seguindo a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) no início deste guia — essa é a melhor opção quando dá tempo e há alguém com acesso a um programa de edição.
-2. **Conferir antes de decidir**, rodando o comando abaixo — ele não converte nada, só gera uma foto (`.jpg`) mostrando exatamente como vai ficar o quadro final:
-python pyBRAS_conversor_libras_wav.py video_libras.mp4 --preview
+2. **Conferir antes de decidir**, rodando o comando abaixo — ele não converte nada, só gera uma foto (`.jpg`) mostrando exatamente como vai ficar o quadro final: <br> <br>
+python pyBRAS_conversor_libras_wav.py video_libras.mp4 --preview <br> <br>
    (No Mac, use `python3` em vez de `python`.) Abra a imagem gerada (vai se chamar `video_libras.preview.jpg`, na mesma pasta) para ver se o(a) intérprete ainda está visível o suficiente.
 3. **Seguir em frente mesmo assim**, se o resultado do preview estiver aceitável, adicionando `--force` ao final do comando de conversão: <br> <br>
 python pyBRAS_conversor_libras_wav.py video_libras.mp4 --force
