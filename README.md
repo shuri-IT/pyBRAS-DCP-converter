@@ -11,6 +11,12 @@ Este guia foi revisado com a ajuda de **[Eduardo Pires de Vasconcelos](https://w
 
 ---
 
+## Compatibilidade testada
+
+Foram feitos DCPs de teste usando os softwares **Easy DCP** e **DCP-o-matic** e, em ambos, o recurso de Libras funcionou corretamente nos pacotes gerados.
+
+---
+
 ## Verificação de segurança
 
 O arquivo `pyBRAS_conversor_libras_wav.py` foi verificado no [VirusTotal](https://www.virustotal.com), que analisa o arquivo com dezenas de antivírus diferentes ao mesmo tempo.
