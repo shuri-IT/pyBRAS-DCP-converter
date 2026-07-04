@@ -85,7 +85,7 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
    - **Windows:** <br> <br>
- python encode_slv_wav.py video_libras.mp4 <br>
+ python encode_slv_wav.py video_libras.mp4 <br> <br>
    - **Mac:** <br> <br>
  python3 encode_slv_wav.py video_libras.mp4 <br>
 
