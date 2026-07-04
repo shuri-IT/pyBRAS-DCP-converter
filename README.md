@@ -41,7 +41,7 @@ Isso é importante e evita retrabalho depois.
 1. Acesse <https://www.python.org/downloads/> e instale o Python.
 2. **Importante:** na primeira tela do instalador, marque a caixinha **"Add Python to PATH"** antes de clicar em instalar. Se você esquecer esse passo, vai precisar desinstalar e instalar de novo.
 3. Abra o **Windows PowerShell** (procure por "PowerShell" no menu Iniciar).
-4. Digite o comando abaixo e aperte Enter:
+4. Dentro da janela do terminal aberta, digite o comando abaixo e aperte Enter:
    ```
    winget install ffmpeg
    ```
