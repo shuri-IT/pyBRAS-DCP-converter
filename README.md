@@ -7,7 +7,7 @@ Você **não precisa saber programar** para usar este programa. Este guia foi es
 
 ## Créditos
 
-Este guia foi revisado com a ajuda de **Eduardo Pires de Vasconcelos**, montador, finalizador e coordenador de pós-produção, que ajudou a identificar pontos de confusão no passo a passo e apontou detalhes técnicos de preparo de vídeo (como o processo de remoção de chroma key e exportação) importantes para quem já trabalha profissionalmente com pós-produção.
+Este guia foi revisado com a ajuda de **[Eduardo Pires de Vasconcelos](https://www.imdb.com/pt/name/nm10246068/)**, montador, finalizador e coordenador de pós-produção, que ajudou a identificar pontos de confusão no passo a passo e apontou detalhes técnicos de preparo de vídeo (como o processo de remoção de chroma key e exportação) importantes para quem já trabalha profissionalmente com pós-produção.
 
 ---
 
