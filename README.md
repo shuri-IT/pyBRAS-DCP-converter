@@ -176,7 +176,7 @@ O arquivo `video_bruto_preparado.mp4` é o que você usa no [passo a passo de co
 
 Antes de instalar o Python e o FFmpeg, baixe os arquivos do programa:
 
-**[⬇ Baixar pyBRAS-DCP-converter (v1.2.4)](https://github.com/shuri-IT/pyBRAS-DCP-converter/archive/refs/tags/v1.2.4.zip)**
+**[⬇ Baixar pyBRAS-DCP-converter (v1.2.5)](https://github.com/shuri-IT/pyBRAS-DCP-converter/archive/refs/tags/v1.2.5.zip)**
 
 Depois de baixar, extraia o arquivo `.zip` (no Windows, clique com o botão direito no arquivo baixado e escolha "Extrair Tudo"; no Mac, basta dar um duplo clique). Isso vai criar uma pasta chamada algo como `pyBRAS-DCP-converter-1.2.4` — dentro dela está o `pyBRAS_conversor_libras_wav.py` que você vai usar mais adiante neste guia.
 
