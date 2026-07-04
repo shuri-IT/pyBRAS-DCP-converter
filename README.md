@@ -8,7 +8,7 @@ Você **não precisa saber programar** para usar este programa. Este guia foi es
 
 ## O que esse programa faz, em resumo
 
-Você tem um vídeo com um(a) intérprete de Libras. O programa converte esse vídeo em um arquivo `.wav` especial, que **não é um áudio normal** — é um vídeo disfarçado de áudio, para que o projetor de cinema consiga exibi-lo no Canal 15 junto com o filme.
+Você tem um vídeo com um(a) intérprete de Libras. O programa converte esse vídeo em um arquivo `.wav` especial, que **não é um áudio normal** — é um vídeo disfarçado de áudio, para que dispositivos de acessibilidade dos cinemas consigam exibir LIBRAS junto com o filme.
 
 Você entrega o `.wav` gerado para quem está montando o DCP do filme. Não é necessário entender os detalhes técnicos por trás disso.
 
@@ -57,7 +57,7 @@ Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1
 1. Acesse <https://www.python.org/downloads/> e instale o Python.
 2. **Importante:** na primeira tela do instalador, marque a caixinha **"Add Python to PATH"** antes de clicar em instalar. Se você esquecer esse passo, vai precisar desinstalar e instalar de novo.
 3. Abra o **Windows PowerShell** (procure por "PowerShell" no menu Iniciar).
-4. Digite o comando abaixo e aperte Enter:
+4. Digite o comando abaixo e aperte Enter: <br> <br>
 winget install ffmpeg
 
 ### Mac
@@ -66,10 +66,10 @@ winget install ffmpeg
 
    > **Antes de continuar:** em algum momento da instalação abaixo, o Terminal vai pedir sua senha, mostrando algo como `Password:` e uma linha dizendo que está verificando o acesso de administrador (`sudo`). **Isso é normal e esperado, não é vírus nem invasão.** É só a instalação pedindo a senha que você usa para desbloquear o Mac ou instalar aplicativos. Digite sua senha normalmente e aperte Enter — é esperado que **nada apareça na tela** enquanto você digita (nem bolinhas, nem letras), o Terminal esconde a senha por segurança, mas ele está recebendo o que você digita. Se você não sabe a senha de administrador desse computador (por exemplo, é um computador da empresa gerenciado por outra pessoa), pare aqui e peça ajuda a quem administra a máquina, em vez de tentar adivinhar.
 
-2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter:
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-3. Depois que terminar, instale o Python e o FFmpeg com:
-brew install python ffmpeg
+2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter: <br> <br>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" <br> <br>
+3. Depois que terminar, instale o Python e o FFmpeg com: <br> <br>
+brew install python ffmpeg <br> <br>
 
 Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#solução-de-problemas) no fim deste guia.
 
@@ -84,10 +84,10 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
    - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.)
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
-   - **Windows:**
- python pyBRAS.py video_libras.mp4
-   - **Mac:**
- python3 pyBRAS.py video_libras.mp4
+   - **Windows:** <br> <br>
+ python pyBRAS.py video_libras.mp4 <br> <br>
+   - **Mac:** <br> <br>
+ python3 pyBRAS.py video_libras.mp4 <br> <br>
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
 Codificando video_libras.mp4
