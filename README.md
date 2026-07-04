@@ -50,7 +50,7 @@ winget install ffmpeg
 
    > **Antes de continuar:** em algum momento da instalação abaixo, o Terminal vai pedir sua senha, mostrando algo como `Password:` e uma linha dizendo que está verificando o acesso de administrador (`sudo`). **Isso é normal e esperado, não é vírus nem invasão.** É só a instalação pedindo a senha que você usa para desbloquear o Mac ou instalar aplicativos. Digite sua senha normalmente e aperte Enter — é esperado que **nada apareça na tela** enquanto você digita (nem bolinhas, nem letras), o Terminal esconde a senha por segurança, mas ele está recebendo o que você digita. Se você não sabe a senha de administrador desse computador (por exemplo, é um computador da empresa gerenciado por outra pessoa), pare aqui e peça ajuda a quem administra a máquina, em vez de tentar adivinhar.
 
-2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter:
+2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter: <br><br>
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 3. Depois que terminar, instale o Python e o FFmpeg com:
 brew install python ffmpeg
