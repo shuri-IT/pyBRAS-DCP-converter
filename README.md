@@ -19,7 +19,7 @@ Você entrega o `.wav` gerado para quem está montando o DCP do filme. Não é n
 Isso é importante e evita retrabalho depois.
 
 - **Formato do arquivo:** `.mp4` ou `.mov` funcionam bem. A maioria dos vídeos gravados em celular já está em um desses formatos.
-- **Formato da imagem (proporção):** o ideal é um vídeo **na vertical**, parecido com a proporção de um Story do Instagram ou de um vídeo de celular gravado na posição vertical (mais alto do que largo). Se o vídeo do(a) intérprete foi gravado na horizontal (like uma gravação de câmera de reunião ou webcam widescreen), o programa ainda vai funcionar, mas vai **avisar você** antes de continuar — veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) mais abaixo.
+- **Formato da imagem (proporção):** o ideal é um vídeo **na vertical**, parecido com a proporção de um Story do Instagram ou de um vídeo de celular gravado na posição vertical (mais alto do que largo). Se o vídeo do(a) intérprete foi gravado na horizontal (como uma gravação de câmera de reunião ou webcam widescreen), o programa ainda vai funcionar, mas vai **avisar você** antes de continuar — veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) mais abaixo.
 - **Duração mínima:** pelo menos 2 segundos. Vídeos mais curtos que isso não podem ser convertidos.
 - **Nome do arquivo:** evite espaços e acentos no nome do vídeo, se possível. Por exemplo, prefira `video_libras.mp4` em vez de `vídeo do intérprete final v2.mp4`. Não é obrigatório, mas evita dor de cabeça.
 
@@ -42,15 +42,21 @@ Isso é importante e evita retrabalho depois.
 2. **Importante:** na primeira tela do instalador, marque a caixinha **"Add Python to PATH"** antes de clicar em instalar. Se você esquecer esse passo, vai precisar desinstalar e instalar de novo.
 3. Abra o **Windows PowerShell** (procure por "PowerShell" no menu Iniciar).
 4. Digite o comando abaixo e aperte Enter:
-winget install ffmpeg
+   ```
+   winget install ffmpeg
+   ```
 
 ### Mac
 
 1. Abra o aplicativo **Terminal** (procure por "Terminal" no Spotlight, com Cmd+Espaço).
 2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter:
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 3. Depois que terminar, instale o Python e o FFmpeg com:
-brew install python ffmpeg
+   ```
+   brew install python ffmpeg
+   ```
 
 Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#solução-de-problemas) no fim deste guia.
 
@@ -66,17 +72,24 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
    - **Windows:**
- python encode_slv_wav.py video_libras.mp4
+     ```
+     python encode_slv_wav.py video_libras.mp4
+     ```
    - **Mac:**
- python3 encode_slv_wav.py video_libras.mp4
+     ```
+     python3 encode_slv_wav.py video_libras.mp4
+     ```
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
-Codificando video_libras.mp4
-vídeo forçado:      24 fps, 480x640, VP9 @ 576000 bps
-duração do bloco:   2s = 48 frames = 288000 bytes
-PCM de saída:       24-bit / 48000 Hz / 1 canal
-Sucesso! video_libras.wav foi gravado (use este arquivo no canal 15 de áudio do DCP)
-OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 24-bit / 1 canal PCM
+   ```
+   Codificando video_libras.mp4
+     vídeo forçado:      24 fps, 480x640, VP9 @ 576000 bps
+     duração do bloco:   2s = 48 frames = 288000 bytes
+     PCM de saída:       24-bit / 48000 Hz / 1 canal
+
+   Sucesso! video_libras.wav foi gravado (use este arquivo no canal 15 de áudio do DCP)
+   OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 24-bit / 1 canal PCM
+   ```
    A tela pode ficar "parada" por um tempo em vídeos longos — isso é normal, é o computador processando o vídeo.
 
 6. Quando aparecer a linha começando com **"Sucesso!"** seguida de uma linha começando com **"OK:"**, terminou. O arquivo `.wav` vai estar na mesma pasta, pronto para ser entregue a quem está montando o DCP.
@@ -88,11 +101,14 @@ OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 2
 ## Se aparecer um aviso sobre o formato do vídeo
 
 Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido, você vai ver algo assim antes da conversão começar:
+
+```
 aviso: a origem é 1920x1080; para encaixá-la no quadro retrato exigido de 480x640 sem
 distorcer a imagem, ela será reduzida para apenas 480x270 e receberá tarjas pretas
 (letterbox) — cobrindo somente 42% do quadro.
 O(a) intérprete pode aparecer pequeno(a) e difícil de ver. Considere recortar a origem
 para uma proporção próxima de 3:4 (retrato) antes de codificar.
+```
 
 **O que isso significa, em português simples:** o vídeo que você recebeu é "deitado" (horizontal) ou tem um formato muito diferente do exigido pelo Canal 15. O programa consegue converter mesmo assim, mas vai colocar tarjas pretas nas bordas para não distorcer a imagem — e dependendo de quão diferente for o formato, o(a) intérprete pode aparecer bem pequeno(a) no resultado final.
 
@@ -100,10 +116,14 @@ Você tem três opções:
 
 1. **Pedir um novo vídeo** para quem gravou, orientando a gravar na vertical (como um vídeo de celular seguro na posição de pé, ou como um Story do Instagram). Essa é a melhor opção quando dá tempo.
 2. **Conferir antes de decidir**, rodando o comando abaixo — ele não converte nada, só gera uma foto (`.jpg`) mostrando exatamente como vai ficar o quadro final:
-python encode_slv_wav.py video_libras.mp4 --preview
+   ```
+   python encode_slv_wav.py video_libras.mp4 --preview
+   ```
    (No Mac, use `python3` em vez de `python`.) Abra a imagem gerada (vai se chamar `video_libras.preview.jpg`, na mesma pasta) para ver se o(a) intérprete ainda está visível o suficiente.
 3. **Seguir em frente mesmo assim**, se o resultado do preview estiver aceitável, adicionando `--force` ao final do comando de conversão:
-python encode_slv_wav.py video_libras.mp4 --force
+   ```
+   python encode_slv_wav.py video_libras.mp4 --force
+   ```
 
 Se você rodar o comando normal (sem `--force`) e o terminal perguntar `Continuar mesmo assim, com letterbox pesado? [s/N]:`, digite `s` e aperte Enter para continuar, ou apenas aperte Enter para cancelar.
 
@@ -112,7 +132,10 @@ Se você rodar o comando normal (sem `--force`) e o terminal perguntar `Continua
 ## Conferir se um arquivo `.wav` já pronto está correto
 
 Se você já tem um arquivo `.wav` (gerado por este programa ou recebido de outra pessoa) e quer confirmar que ele está no formato certo, sem gerar um novo:
+
+```
 python encode_slv_wav.py --check video_libras.wav
+```
 
 Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um problema, verá uma linha começando com `FALHOU:` explicando o que está errado.
 
@@ -142,3 +165,82 @@ Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um 
 - **Libras:** Língua Brasileira de Sinais.
 - **Terminal / Prompt de Comando:** um programa onde você digita comandos de texto em vez de clicar em botões — é assim que este conversor é usado, já que ele não tem uma tela com botões.
 - **`.wav`:** neste caso, não é um áudio de verdade — é um arquivo de vídeo "disfarçado" para caber no formato de áudio exigido pelo Canal 15.
+
+---
+
+## Para os nerds da codificação 🤓
+
+Esta seção é para quem já trabalha com DCP e quer saber exatamente o que está acontecendo por trás do `Sucesso!`. Se você só precisa converter o vídeo, pode parar de ler aqui.
+
+### A norma seguida
+
+Este conversor implementa o **ISDCF Doc13 — "Sign Language Video Encoding for Digital Cinema"**, o documento técnico que define como um vídeo de intérprete de Libras/sign language deve ser empacotado dentro de uma trilha de áudio PCM para ocupar o Canal 15 de um DCP.
+
+- Documento oficial: <http://isdcf.com/papers/ISDCF-Doc13-Sign-Language-Video-Encoding-for-Digital-Cinema.pdf>
+- Implementação de referência (Perl, mantida pela própria ISDCF): <https://github.com/ISDCF/Sign-Language-Video-Encoding>
+
+Este programa é, na prática, uma reimplementação em Python do encoder de referência acima, mantendo os mesmos parâmetros de codificação.
+
+### Parâmetros exigidos pela norma
+
+| Parâmetro | Valor exigido | Observação |
+| --- | --- | --- |
+| Codec de vídeo | VP9 (`libvpx-vp9`) | Obrigatório pela norma. |
+| Resolução | 480×640 (retrato) | Fixa, independente da resolução de origem. |
+| Taxa de quadros | 24,0 fps | Forçada mesmo que a origem seja 23.976, 25, 29.97 etc. |
+| Formato de pixel | `yuv420p` | — |
+| Duração do chunk | 2 segundos | Cada chunk de vídeo VP9 vira um bloco PCM independente. |
+| Amostragem PCM | 48.000 Hz | 96 kHz é **proibido** pela norma para este canal. |
+| Profundidade PCM | 24-bit | — |
+| Canais PCM | 1 (mono) | — |
+
+### Como o vídeo VP9 é escondido dentro do WAV
+
+Cada bloco PCM de 288.000 bytes (48.000 Hz × 24-bit ÷ 8 × 2s) segue este layout binário:
+
+```
+H1 (4 bytes, big-endian) = 0xFFFFFFFF   marcador de sincronismo
+Lv (4 bytes, big-endian) = tamanho do segmento VP9 daquele chunk
+Lb (4 bytes, big-endian) = tamanho total do bloco (sempre 288.000)
+Le (4 bytes, big-endian) = tamanho do cabeçalho EBML/WebM compartilhado
+H2 (4 bytes, big-endian) = 0xFFFFFFFF   marcador de sincronismo
+E  (Le bytes)            = cabeçalho EBML/WebM (repetido em todo bloco)
+V  (Lv bytes)            = segmento VP9 daquele chunk de 2s
+P  (resto)               = zeros até completar Lb
+```
+
+### Duas abordagens comuns para implementar essa norma
+
+A ISDCF Doc13 define o resultado final exigido, mas não define como implementar a segmentação do vídeo ou o enquadramento — isso fica a critério de quem programa. Na prática, existem duas abordagens comuns que valem a pena conhecer se você trabalha nessa área:
+
+| Aspecto | Abordagem usada neste conversor | Outra abordagem comum |
+| --- | --- | --- |
+| Como o VP9 é dividido em chunks de 2s | Usa o muxer `webm_chunk` do próprio ffmpeg, que já entrega o cabeçalho compartilhado e cada segmento separadamente | Codifica o vídeo inteiro primeiro, depois corta com o muxer genérico `segment` e localiza os limites de cada chunk varrendo os bytes brutos em busca do ID de Segment do WebM (`0x18538067`) |
+| Controle de taxa de bits (bitrate) | CBR travado: `-b:v`, `-minrate` e `-maxrate` no mesmo valor (576.000 bps), mais `-deadline realtime`, `-static-thresh 0`, `-lag-in-frames 0`, `-error-resilient 1` | Define apenas um bitrate máximo (ex: `-maxrate` sem `-minrate` nem `-bufsize`), com `-deadline good` |
+| Enquadramento de vídeos fora da proporção 3:4 | Escala preservando a proporção original e adiciona tarjas pretas (letterbox) até fechar 480×640 | Recorta (crop) as bordas do vídeo para forçar a proporção 3:4 antes de escalar |
+| Verificação do arquivo gerado | `--check` / autoverificação embutida no próprio script, reaproveitando as mesmas constantes do encoder | Ferramenta de validação separada, feita depois da codificação |
+| Interface | Linha de comando | Aplicativo com interface gráfica |
+
+Nenhuma das duas está "errada" pela norma em si — são escolhas de implementação, cada uma com trade-offs. Usar o `webm_chunk` evita ter que adivinhar limites de bytes no formato WebM em vez de deixar o próprio ffmpeg entregar os chunks já separados. Travar o CBR (`minrate = maxrate`) evita que um chunk de maior movimento gere um segmento VP9 grande demais para caber nos 288.000 bytes fixos do bloco — sem essa trava, o VP9 pode estourar o bitrate médio em cenas mais complexas e o bloco não cabe no tamanho fixo exigido. E optar por letterbox em vez de crop evita cortar parte da imagem do(a) intérprete (mãos, rosto) à custa de tarjas pretas nas bordas.
+
+### Recapitulando os parâmetros técnicos deste script
+
+```
+Codec:            VP9 (libvpx-vp9)
+Resolução:        480×640
+Taxa de quadros:  24.0 fps (forçada)
+Pixel format:     yuv420p
+Bitrate:          576.000 bps (CBR travado)
+Chunk:            2.0s / 48 frames (configurável via --chunk-duration)
+Muxer:            webm_chunk
+PCM:              48.000 Hz / 24-bit / mono
+Bloco PCM:        288.000 bytes (20 bytes de cabeçalho + E + V + padding)
+```
+
+Flags relevantes para quem for automatizar isso em lote:
+
+- `-c/--chunk-duration`: altera a duração do chunk (padrão 2.0s, conforme a norma — só mude se souber o que está fazendo).
+- `--check arquivo.wav`: valida um `.wav` já existente sem recodificar.
+- `--force`: pula a confirmação de letterbox pesado, útil em scripts automatizados.
+- `--no-validate`: pula a autoverificação pós-codificação, se você já validar por fora.
+```
