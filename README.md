@@ -1,4 +1,4 @@
-markdown# pyBRAS-DCP-converter
+# pyBRAS-DCP-converter
 
 Este programa transforma um vídeo em um arquivo de áudio especial (`.wav`) que pode ser usado no **Canal 15** de um DCP. Foi criado para permitir a inclusão do canal de **Libras** em exibições de cinema.
 
