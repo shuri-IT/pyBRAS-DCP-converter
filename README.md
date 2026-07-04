@@ -96,6 +96,14 @@ Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1
 
 ## Instalação (só precisa fazer isso uma vez)
 
+### Baixar o programa
+
+Antes de instalar o Python e o FFmpeg, baixe os arquivos do programa:
+
+**[⬇ Baixar pyBRAS-DCP-converter (v1.2.4)](https://github.com/shuri-IT/pyBRAS-DCP-converter/archive/refs/tags/v1.2.4.zip)**
+
+Depois de baixar, extraia o arquivo `.zip` (no Windows, clique com o botão direito no arquivo baixado e escolha "Extrair Tudo"; no Mac, basta dar um duplo clique). Isso vai criar uma pasta chamada algo como `pyBRAS-DCP-converter-1.2.4` — dentro dela está o `pyBRAS_conversor_libras_wav.py` que você vai usar mais adiante neste guia.
+
 ### Windows
 
 1. Acesse <https://www.python.org/downloads/> e instale o Python.
