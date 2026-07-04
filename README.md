@@ -198,6 +198,12 @@ Se você já tem um arquivo `.wav` (gerado por este programa ou recebido de outr
 
 Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um problema, verá uma linha começando com `FALHOU:` explicando o que está errado.
 
+> **Atenção:** se o `.wav` foi gerado com uma duração de bloco diferente do padrão
+> (usando a opção `-c`/`--chunk-duration`), você precisa passar o **mesmo valor**
+> na hora de conferir — por exemplo, `python pyBRAS_conversor_libras_wav.py --check
+> -c 4 video_libras.wav` para um arquivo gerado com blocos de 4 segundos. Sem isso,
+> a checagem vai reclamar (erroneamente) do tamanho dos blocos. Se você nunca usou
+> a opção `-c`, pode ignorar este aviso.
 ---
 
 ## Solução de Problemas
