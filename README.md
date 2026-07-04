@@ -25,6 +25,24 @@ Isso é importante e evita retrabalho depois.
 
 ---
 
+## Etapa 0 (recomendada): preparar o vídeo em um editor antes de converter
+
+Se você (ou a pessoa que editou o vídeo) tem acesso a um programa de edição de vídeo (Premiere, DaVinci Resolve, Filmora, CapCut etc.), o resultado final fica melhor e com mais controle se o vídeo já for preparado **antes** de rodar o conversor, em vez de depender dos ajustes automáticos do programa. Esta etapa é **fortemente recomendada** — o script consegue ajustar resolução e taxa de quadros sozinho — mas é o caminho ideal para quem já edita vídeo, porque dá controle total sobre o enquadramento do(a) intérprete em vez de deixar isso por conta de um ajuste automático.
+
+Passos:
+
+1. Abra o arquivo de vídeo do(a) intérprete de Libras no seu programa de edição.
+2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo agora e substitua por um fundo sólido (geralmente preto) — o Canal 15 não usa transparência.
+3. Ajuste a resolução de exportação para **480×640** (retrato), enquadrando o(a) intérprete manualmente dentro desse quadro. Fazer isso manualmente evita que o conversor precise reduzir a imagem e adicionar tarjas pretas (letterbox) ou cortar a imagem automaticamente depois.
+4. Ajuste a taxa de quadros para **24 fps progressivo** (às vezes chamado de "24p").
+5. Exporte o vídeo em **H.264** com bitrate de aproximadamente **1 Mbps** (1.000 kbps).
+
+Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1 logo abaixo — o `encode_slv_wav.py` vai transformá-lo no `.wav` final. Fazendo esse preparo manualmente, é bem provável que você nunca veja o aviso de "letterbox" mencionado mais adiante neste guia, porque o vídeo já vai entrar no formato certo.
+
+> **Se você não tem acesso a um programa de edição:** sem problema — pule esta etapa e vá direto para o Passo 1. O `encode_slv_wav.py` faz os ajustes de resolução e taxa de quadros automaticamente. A única diferença é que, se o vídeo original estiver muito longe da proporção 480×640, o programa pode precisar reduzir bastante a imagem e colocar tarjas pretas nas bordas — veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) mais abaixo.
+
+---
+
 ## Requisitos
 
 - Um computador (Windows ou Mac).
@@ -41,7 +59,7 @@ Isso é importante e evita retrabalho depois.
 1. Acesse <https://www.python.org/downloads/> e instale o Python.
 2. **Importante:** na primeira tela do instalador, marque a caixinha **"Add Python to PATH"** antes de clicar em instalar. Se você esquecer esse passo, vai precisar desinstalar e instalar de novo.
 3. Abra o **Windows PowerShell** (procure por "PowerShell" no menu Iniciar).
-4. Digite o comando abaixo e aperte Enter: <br> <br>
+4. Digite o comando abaixo e aperte Enter:
 winget install ffmpeg
 
 ### Mac
@@ -50,9 +68,9 @@ winget install ffmpeg
 
    > **Antes de continuar:** em algum momento da instalação abaixo, o Terminal vai pedir sua senha, mostrando algo como `Password:` e uma linha dizendo que está verificando o acesso de administrador (`sudo`). **Isso é normal e esperado, não é vírus nem invasão.** É só a instalação pedindo a senha que você usa para desbloquear o Mac ou instalar aplicativos. Digite sua senha normalmente e aperte Enter — é esperado que **nada apareça na tela** enquanto você digita (nem bolinhas, nem letras), o Terminal esconde a senha por segurança, mas ele está recebendo o que você digita. Se você não sabe a senha de administrador desse computador (por exemplo, é um computador da empresa gerenciado por outra pessoa), pare aqui e peça ajuda a quem administra a máquina, em vez de tentar adivinhar.
 
-2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter: <br> <br>
+2. Instale o Homebrew (um instalador de programas para Mac) colando este comando e apertando Enter:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-3. Depois que terminar, instale o Python e o FFmpeg com: <br> <br>
+3. Depois que terminar, instale o Python e o FFmpeg com:
 brew install python ffmpeg
 
 Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#solução-de-problemas) no fim deste guia.
@@ -62,15 +80,15 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 ## Como converter um vídeo — passo a passo
 
 1. Crie uma pasta nova no seu computador (pode chamar de "Conversao Libras", por exemplo).
-2. Coloque dentro dessa pasta **dois arquivos**: o `encode_slv_wav.py` e o vídeo em Libras que você quer converter.
-3. Abra o terminal **dentro dessa pasta**: <br>
-   - **Windows:** abra a pasta no Explorador de Arquivos, segure Shift e clique com o botão direito em um espaço vazio da pasta, e escolha "Abrir janela do PowerShell aqui" (ou "Abrir no Terminal", dependendo da versão do Windows). <br> <br>
-   - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.) <br>
+2. Coloque dentro dessa pasta **dois arquivos**: o `encode_slv_wav.py` e o vídeo em Libras que você quer converter (idealmente já preparado conforme a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) acima).
+3. Abra o terminal **dentro dessa pasta**:
+   - **Windows:** abra a pasta no Explorador de Arquivos, segure Shift e clique com o botão direito em um espaço vazio da pasta, e escolha "Abrir janela do PowerShell aqui" (ou "Abrir no Terminal", dependendo da versão do Windows).
+   - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.)
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
-   - **Windows:** <br>
+   - **Windows:**
  python encode_slv_wav.py video_libras.mp4
-   - **Mac:** <br>
+   - **Mac:**
  python3 encode_slv_wav.py video_libras.mp4
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
@@ -90,18 +108,18 @@ OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 2
 
 ## Se aparecer um aviso sobre o formato do vídeo
 
-Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido, você vai ver algo assim antes da conversão começar: <br><br>
+Se o vídeo enviado pelo(a) intérprete não estiver próximo do formato vertical exigido — o que não deve acontecer se você seguiu a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) acima — você vai ver algo assim antes da conversão começar:
 aviso: a origem é 1920x1080; para encaixá-la no quadro retrato exigido de 480x640 sem
 distorcer a imagem, ela será reduzida para apenas 480x270 e receberá tarjas pretas
 (letterbox) — cobrindo somente 42% do quadro.
 O(a) intérprete pode aparecer pequeno(a) e difícil de ver. Considere recortar a origem
 para uma proporção próxima de 3:4 (retrato) antes de codificar.
-<br><br>
+
 **O que isso significa, em português simples:** o vídeo que você recebeu é "deitado" (horizontal) ou tem um formato muito diferente do exigido pelo Canal 15. O programa consegue converter mesmo assim, mas vai colocar tarjas pretas nas bordas para não distorcer a imagem — e dependendo de quão diferente for o formato, o(a) intérprete pode aparecer bem pequeno(a) no resultado final.
 
 Você tem três opções:
 
-1. **Pedir um novo vídeo** para quem gravou, orientando a gravar na vertical (como um vídeo de celular seguro na posição de pé, ou como um Story do Instagram). Essa é a melhor opção quando dá tempo.
+1. **Preparar o vídeo em um editor**, seguindo a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) no início deste guia — essa é a melhor opção quando dá tempo e há alguém com acesso a um programa de edição.
 2. **Conferir antes de decidir**, rodando o comando abaixo — ele não converte nada, só gera uma foto (`.jpg`) mostrando exatamente como vai ficar o quadro final:
 python encode_slv_wav.py video_libras.mp4 --preview
    (No Mac, use `python3` em vez de `python`.) Abra a imagem gerada (vai se chamar `video_libras.preview.jpg`, na mesma pasta) para ver se o(a) intérprete ainda está visível o suficiente.
@@ -136,7 +154,7 @@ Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um 
 | `erro: [arquivo]: arquivo não encontrado` | O nome do vídeo foi digitado errado, ou o vídeo não está na mesma pasta que o `encode_slv_wav.py`. Confira o nome exato do arquivo (no Windows, ative "mostrar extensões de arquivo" nas opções do Explorador de Arquivos para ver o `.mp4` no fim do nome). |
 | `erro: a origem tem [x]s de duração, menos que um bloco de 2s` | O vídeo é curto demais (menos de 2 segundos). Use um vídeo mais longo. |
 | `erro: [arquivo] não contém nenhuma trilha de vídeo (ou o arquivo está corrompido/ilegível)` | O arquivo enviado não é um vídeo válido, ou está corrompido. Peça o arquivo novamente para quem enviou. |
-| Aparece um `aviso:` sobre "letterbox" e uma pergunta `[s/N]` | O vídeo não está no formato vertical esperado. Veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) acima. |
+| Aparece um `aviso:` sobre "letterbox" e uma pergunta `[s/N]` | O vídeo não está no formato vertical esperado. Veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) acima — ou faça a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-editor-antes-de-converter) da próxima vez para evitar esse aviso. |
 | A tela fica "travada" por um tempo | É normal em vídeos longos — apenas espere. Só se preocupe se passarem muitos minutos sem nenhuma mudança. |
 | Aparece `Sucesso!` mas depois `FALHOU:` | A conversão terminou mas a checagem final encontrou um problema no arquivo gerado. Tente rodar de novo; se persistir, guarde a mensagem completa de erro para pedir ajuda. |
 
@@ -147,6 +165,7 @@ Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um 
 - **DCP:** o formato de arquivo usado para exibir filmes em cinemas digitais.
 - **Canal 15:** uma trilha extra dentro do DCP reservada para conteúdo de acessibilidade, como o vídeo de Libras.
 - **Libras:** Língua Brasileira de Sinais.
+- **Chroma key:** a técnica de gravar sobre um fundo verde ou azul para depois remover esse fundo na edição.
 - **Terminal / Prompt de Comando:** um programa onde você digita comandos de texto em vez de clicar em botões — é assim que este conversor é usado, já que ele não tem uma tela com botões.
 - **`.wav`:** neste caso, não é um áudio de verdade — é um arquivo de vídeo "disfarçado" para caber no formato de áudio exigido pelo Canal 15.
 
