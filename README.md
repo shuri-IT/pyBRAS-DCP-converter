@@ -332,3 +332,25 @@ Detalhes de comportamento que valem saber ao automatizar:
 - Metadados de rotação (vídeos de celular gravados em pé mas armazenados "deitados"
   com tag de rotação 90/270) são detectados via ffprobe e considerados no cálculo de
   proporção/letterbox.
+
+## Ajuda e problemas
+
+Se algo deu errado e a tabela de [Solução de Problemas](#solução-de-problemas) não
+resolveu, abra uma issue no repositório do projeto descrevendo o que aconteceu:
+
+- <https://github.com/shuri-IT/pyBRAS-DCP-converter/issues>
+
+Inclua na issue: o comando exato que você rodou, a mensagem completa que apareceu no
+terminal (copie e cole tudo) e, se possível, o resultado de `ffmpeg -version`. Não é
+preciso anexar o vídeo.
+
+## Licença
+
+Este projeto é distribuído sob a licença **MIT** — você pode usar, copiar, modificar
+e redistribuir este programa livremente, inclusive em pipelines comerciais de
+masterização de DCP, desde que mantenha o aviso de copyright. O texto completo (em
+inglês, a versão canônica da licença) está no arquivo [`LICENSE`](LICENSE) do
+repositório.
+
+Este conversor é uma reimplementação independente, feita em Python a partir do
+documento público ISDCF Doc13; não contém código do encoder de referência da ISDCF.
