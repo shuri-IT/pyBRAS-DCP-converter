@@ -143,13 +143,13 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 
 5. Aperte Enter e aguarde. Você vai ver algo assim na tela:
 <br>
- > Codificando video_libras.mp4 <br>
- > vídeo forçado:      24 fps, 480x640, VP9 @ 576000 bps <br>
- > duração do bloco:   2s = 48 frames = 288000 bytes <br>
- > PCM de saída:       24-bit / 48000 Hz / 1 canal <br>
- > Sucesso! video_libras.wav foi gravado (use este arquivo no canal 15 de áudio do DCP) <br>
- > OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 24-bit / 1 canal PCM <br>
- > A tela pode ficar "parada" por um tempo em vídeos longos — isso é normal, é o computador processando o vídeo.
+   > Codificando video_libras.mp4 <br>
+   > vídeo forçado:      24 fps, 480x640, VP9 @ 576000 bps <br>
+   > duração do bloco:   2s = 48 frames = 288000 bytes <br>
+   > PCM de saída:       24-bit / 48000 Hz / 1 canal <br>
+   > Sucesso! video_libras.wav foi gravado (use este arquivo no canal 15 de áudio do DCP) <br>
+   > OK: video_libras.wav — 4 bloco(s) de 288000 bytes, ~8s de vídeo, 48000 Hz / 24-bit / 1 canal PCM <br>
+   > A tela pode ficar "parada" por um tempo em vídeos longos — isso é normal, é o computador processando o vídeo.
 
 6. Quando aparecer a linha começando com **"Sucesso!"** seguida de uma linha começando com **"OK:"**, terminou. O arquivo `.wav` vai estar na mesma pasta, pronto para ser entregue a quem está montando o DCP.
 
