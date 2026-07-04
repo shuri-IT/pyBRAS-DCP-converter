@@ -3,7 +3,7 @@
 Este programa transforma um vídeo em um arquivo de áudio especial (`.wav`) que pode ser usado no **Canal 15** de um DCP. Foi criado para permitir a inclusão do canal de **Libras** em exibições de cinema.
 
 Você **não precisa saber programar** para usar este programa. Este guia foi escrito pensando em quem nunca usou um terminal antes — siga os passos na ordem e vai funcionar.
----
+
 
 ## Créditos
 
