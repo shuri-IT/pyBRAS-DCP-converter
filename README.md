@@ -1,5 +1,3 @@
-Here you go — full rewrite, in plain Portuguese, written for someone who has never opened a terminal before. I pulled the current README content first so nothing existing gets lost, and folded in every new behavior we added (the letterbox warning, --preview, --force, --check, minimum-length check) with the actual translated error messages so people can search/match them directly.
-Copy everything inside the block below and paste it as the full content of README.md:
 markdown# pyBRAS-DCP-converter
 
 Este programa transforma um vídeo em um arquivo de áudio especial (`.wav`) que pode ser usado no **Canal 15** de um DCP. Foi criado para permitir a inclusão do canal de **Libras** em exibições de cinema.
