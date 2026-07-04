@@ -33,7 +33,7 @@ O resultado final ficará melhor e com mais controle se o vídeo já for prepara
 Passos:
 
 1. Abra o arquivo de vídeo do(a) intérprete de Libras no seu programa de edição.
-2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo agora e substitua por um fundo sólido (geralmente preto) — o Canal 15 não usa transparência.
+2. Se o vídeo foi gravado com fundo verde/azul (chroma key), remova o fundo com efeitos do programa (3D Keyer no DaVinci, Color Key no Premiere) e adicione um fundo sólido preto na track anterior ao da track da Libras (ex. track 1 com o sólido e track 2 com intérprete de LIBRAS já sem o chroma).
 3. Ajuste a resolução de timeline para **480×640**, enquadrando o(a) intérprete manualmente dentro desse quadro. Fazer isso manualmente evita que o conversor precise reduzir a imagem e adicionar tarjas pretas (letterbox) ou cortar a imagem automaticamente depois.
 4. Ajuste o fps para 24 fps e o field order para progressivo.
 5. Exporte o vídeo em **H.264** com bitrate de aproximadamente **1 Mbps** (1.000 kbps).
