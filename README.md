@@ -307,7 +307,28 @@ Bloco PCM:        288.000 bytes (20 bytes de cabeçalho + E + V + padding)
 
 Flags relevantes para quem for automatizar isso em lote:
 
-- `-c/--chunk-duration`: altera a duração do chunk (padrão 2.0s, conforme a norma — só mude se souber o que está fazendo).
-- `--check arquivo.wav`: valida um `.wav` já existente sem recodificar.
-- `--force`: pula a confirmação de letterbox pesado, útil em scripts automatizados.
+- `-c/--chunk-duration`: altera a duração do chunk (padrão 2.0s, conforme a norma —
+  só mude se souber o que está fazendo). Se você gerar um `.wav` com valor diferente
+  do padrão, precisa passar o mesmo valor ao usar `--check` nele.
+- `--check arquivo.wav`: valida um `.wav` já existente sem recodificar. Sai com
+  código diferente de zero em caso de falha, então dá para usar direto em scripts/CI.
+- `--preview [caminho.jpg]`: gera só o frame de pré-visualização com o mesmo filtro
+  de scale/letterbox do encode. O caminho de saída é opcional; sem ele, o padrão é
+  `<entrada>.preview.jpg`.
+- `--force`: pula a confirmação de letterbox pesado. **Importante para automação:**
+  quando o stdin não é um terminal interativo (pipes, CI, cron), o script não faz a
+  pergunta `[s/N]` — ele **aborta** com erro diante de letterbox pesado, a menos que
+  `--force` esteja presente.
 - `--no-validate`: pula a autoverificação pós-codificação, se você já validar por fora.
+
+Detalhes de comportamento que valem saber ao automatizar:
+
+- O aviso de letterbox dispara quando o conteúdo útil cobriria menos de **70%** do
+  quadro 480×640 após o scale-to-fit (constante `MIN_FRAME_COVERAGE = 0.70` no script).
+- A duração do `.wav` final é sempre um múltiplo inteiro da duração do chunk
+  (arredondada para cima): um vídeo de 7,5s vira ~8s de blocos, com o último chunk
+  parcialmente preenchido. A conciliação com a duração exata do reel fica a cargo do
+  software de masterização do DCP.
+- Metadados de rotação (vídeos de celular gravados em pé mas armazenados "deitados"
+  com tag de rotação 90/270) são detectados via ffprobe e considerados no cálculo de
+  proporção/letterbox.
