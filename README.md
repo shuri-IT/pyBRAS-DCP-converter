@@ -4,6 +4,30 @@ Este programa transforma um vídeo em um arquivo de áudio especial (`.wav`) que
 
 Você **não precisa saber programar** para usar este programa. Este guia foi escrito pensando em quem nunca usou um terminal antes — siga os passos na ordem e vai funcionar.
 
+## Índice
+
+- [Créditos](#créditos)
+- [Compatibilidade testada](#compatibilidade-testada)
+- [Verificação de segurança](#verificação-de-segurança)
+- [O que esse programa faz, em resumo](#o-que-esse-programa-faz-em-resumo)
+- [Antes de começar: como deve ser o vídeo](#antes-de-começar-como-deve-ser-o-vídeo)
+- [Etapa 0 (recomendada): preparar o vídeo em um editor](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação-só-precisa-fazer-isso-uma-vez)
+  - [Windows](#windows)
+  - [Mac](#mac)
+- [Como converter um vídeo — passo a passo](#como-converter-um-vídeo--passo-a-passo)
+- [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo)
+- [Conferir se um arquivo .wav já pronto está correto](#conferir-se-um-arquivo-wav-já-pronto-está-correto)
+- [Solução de Problemas](#solução-de-problemas)
+- [Glossário rápido](#glossário-rápido)
+- [Para os nerds da codificação 🤓](#para-os-nerds-da-codificação-)
+  - [A norma seguida](#a-norma-seguida)
+  - [Parâmetros exigidos pela norma](#parâmetros-exigidos-pela-norma)
+  - [Como o vídeo VP9 é escondido dentro do WAV](#como-o-vídeo-vp9-é-escondido-dentro-do-wav)
+  - [Duas abordagens comuns para implementar essa norma](#duas-abordagens-comuns-para-implementar-essa-norma)
+  - [Recapitulando os parâmetros técnicos deste script](#recapitulando-os-parâmetros-técnicos-deste-script)
+
 
 ## Créditos
 
