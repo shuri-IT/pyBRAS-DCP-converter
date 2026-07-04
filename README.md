@@ -64,7 +64,7 @@ Se algum desses comandos der erro, veja a tabela de [Solução de Problemas](#so
 1. Crie uma pasta nova no seu computador (pode chamar de "Conversao Libras", por exemplo).
 2. Coloque dentro dessa pasta **dois arquivos**: o `encode_slv_wav.py` e o vídeo em Libras que você quer converter.
 3. Abra o terminal **dentro dessa pasta**: <br>
-   - **Windows:** abra a pasta no Explorador de Arquivos, segure Shift e clique com o botão direito em um espaço vazio da pasta, e escolha "Abrir janela do PowerShell aqui" (ou "Abrir no Terminal", dependendo da versão do Windows). <br>
+   - **Windows:** abra a pasta no Explorador de Arquivos, segure Shift e clique com o botão direito em um espaço vazio da pasta, e escolha "Abrir janela do PowerShell aqui" (ou "Abrir no Terminal", dependendo da versão do Windows). <br> <br>
    - **Mac:** abra o Terminal normalmente, digite `cd ` (com um espaço depois) e então arraste a pasta para dentro da janela do Terminal — isso preenche o caminho da pasta automaticamente depois do `cd `. Depois aperte Enter. (Se você arrastar a pasta sem digitar o `cd ` antes, vai aparecer um erro do tipo `zsh: permission denied` — é só voltar e digitar o `cd ` no começo da linha.) <br>
 4. Digite o comando de conversão, trocando `video_libras.mp4` pelo nome real do seu arquivo de vídeo (se o nome tiver espaços, coloque-o entre aspas):
 
