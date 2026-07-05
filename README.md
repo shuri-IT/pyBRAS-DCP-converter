@@ -50,7 +50,7 @@ O arquivo `pyBRAS_conversor_libras_wav.py` foi verificado no [VirusTotal](https:
 - **Resultado:** [0/62 — nenhum antivírus identificou o arquivo como malicioso](https://www.virustotal.com/gui/file/15268e25213cf54b5e546318bb92426e0dce0e7543eea6a7fb190d8dcf2efa23/detection)
 - **SHA256 do arquivo verificado:** `15268e25213cf54b5e546318bb92426e0dce0e7543eea6a7fb190d8dcf2efa23`
 
-> Este selo é válido apenas para a versão exata do arquivo com o hash acima (a v1.2.5). Se o `pyBRAS_conversor_libras_wav.py` for atualizado no futuro, uma nova verificação deve ser feita e o link/hash acima atualizado.
+> Este selo é válido apenas para a versão exata do arquivo com o hash acima (a v1.2.6). Se o `pyBRAS_conversor_libras_wav.py` for atualizado no futuro, uma nova verificação deve ser feita e o link/hash acima atualizado.
 
 ## O que esse programa faz, em resumo
 
