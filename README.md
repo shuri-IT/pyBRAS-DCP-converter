@@ -4,6 +4,8 @@ Este programa transforma um vídeo em um arquivo de áudio especial (`.wav`) que
 
 Você **não precisa saber programar** para usar este programa. Este guia foi escrito pensando em quem nunca usou um terminal antes — siga os passos na ordem e vai funcionar.
 
+Achou o conteúdo abaixo complicado? Experiemente a **[versão web pyBRAS Web)]([https://github.com/shuri-IT/pyBRAS-DCP-converter/archive/refs/tags/v1.2.6.zip](https://shuri-it.github.io/pyBRAS-Web/))**
+
 ## Índice
 
 - [Créditos](#créditos)
