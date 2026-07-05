@@ -97,8 +97,8 @@ Depois de exportar esse arquivo, ele já está pronto para seguir para o Passo 1
 Se você não tem acesso a um programa de edição (ou não tem tempo), o script `pyBRAS_preparador_video.py` faz uma versão automática da Etapa 0. Ele:
 
 1. **Encontra o(a) intérprete no quadro sozinho** — mesmo que ele(a) não esteja centralizado(a). Se o vídeo tem fundo verde/azul, a silhueta sobre o chroma é usada para localizar a pessoa; se não tem, o programa observa **onde há movimento** ao longo do vídeo (as mãos e o rosto de quem sinaliza se movem, o resto não) e recorta ao redor dessa área.
-2. **Recorta em 3:4 (retrato)** ao redor do(a) intérprete, com uma folga de segurança, incluindo o alcance completo das mãos ao longo do vídeo inteiro — não só de um momento.
-3. **Remove o chroma key automaticamente** (detecta se o fundo é verde ou azul e qual o tom exato) e coloca um fundo preto sólido no lugar.
+2. **Recorta em 3:4 (retrato)** ao redor do(a) intérprete, com uma folga de segurança — e depois faz uma **verificação de cobertura**: varre o vídeo **inteiro** (não só amostras) conferindo, frame a frame, se as mãos nunca saem do recorte escolhido. Se em algum instante uma mão passa do limite (um sinal amplo e rápido, por exemplo), o recorte é ampliado automaticamente para incluí-la. Nenhuma mão é cortada.
+3. **Remove o chroma key automaticamente** (detecta se o fundo é verde ou azul e qual o tom exato) e coloca um fundo preto sólido no lugar. Ele também lida com cenários reais imperfeitos: se o fundo verde **não cobre o quadro inteiro** (paredes, portas e móveis aparecendo nas bordas), o recorte é limitado à área do chroma; e **objetos sobre o fundo verde** (um ventilador, um cabo pendurado) são detectados e cobertos com preto — desde que o(a) intérprete nunca passe na frente deles.
 4. **Exporta já no formato certo**: 480×640, 24 fps progressivo, H.264 a 1 Mbps, sem áudio — pronto para entrar direto no `pyBRAS_conversor_libras_wav.py`, sem nenhum aviso de letterbox.
 
 **Limite importante:** o script assume que o(a) intérprete **não anda pelo quadro** (pode gesticular à vontade, só não pode mudar de lugar).
@@ -138,7 +138,8 @@ O arquivo `video_bruto_preparado.mp4` é o que você usa no [passo a passo de co
 | `--similaridade 0.15` | Aumente (até ~0.3) se sobrar borda verde ao redor da pessoa; diminua (até ~0.05) se partes da pessoa estiverem "sumindo". Padrão: 0.10. |
 | `--margem 0.15` | Folga extra ao redor da área detectada (padrão 0.10 = 10%). Aumente se as mãos estiverem encostando na borda do recorte. |
 | `--crop L:A:X:Y` | Pula a detecção e recorta manualmente (largura:altura:x:y, em pixels do vídeo original). Use se a detecção automática errar. |
-| `--amostras 24` | Analisa mais frames ao longo do vídeo (padrão 12). Ajuda se as mãos alcançam posições extremas só em momentos raros. |
+| `--amostras 24` | Analisa mais frames na detecção inicial (padrão 12). |
+| `--cobertura-fps 12` | A verificação de cobertura varre o vídeo inteiro a 6 frames/s por padrão. Aumente para 12 se o(a) intérprete faz sinais extremamente rápidos; `--cobertura-fps 0` desativa a verificação (não recomendado — é ela que garante que nenhuma mão seja cortada). |
 | `-o nome.mp4` | Escolhe o nome do arquivo de saída. |
 
 **Problemas comuns do preparador:**
@@ -146,9 +147,12 @@ O arquivo `video_bruto_preparado.mp4` é o que você usa no [passo a passo de co
 | Mensagem / sintoma | O que fazer |
 | --- | --- |
 | `erro: não foi possível localizar o(a) intérprete automaticamente` | O vídeo tem pouco movimento nas amostras analisadas (ou pouco contraste com o fundo). Tente `--amostras 24`, ou defina o recorte na mão com `--crop`. |
-| O retângulo vermelho do `--preview` cortou uma das mãos | As mãos só chegam naquela posição em momentos que não foram amostrados. Rode com `--amostras 24` e/ou `--margem 0.15`. |
+| Apareceu `cobertura: recorte ampliado — mãos encontradas fora do enquadramento inicial` | Informativo, não é erro: as mãos alcançaram, em algum instante, uma posição que as amostras iniciais não tinham visto — e o recorte já foi ampliado sozinho para incluí-las. Se o recorte final ficou muito largo por causa disso (intérprete pequeno demais), confira com `--preview`; pode valer regravar com gestos um pouco mais contidos ou a câmera mais afastada. |
+| O retângulo vermelho do `--preview` cortou uma das mãos | Não deveria acontecer com a verificação de cobertura ligada (padrão). Se acontecer, aumente `--cobertura-fps` para 12 e `--margem` para 0.15, e reporte o caso (veja [Ajuda](#ajuda-e-problemas)). |
 | Sobrou uma borda verde ao redor da pessoa | Aumente `--similaridade` aos poucos (0.15, 0.20…) e confira com `--preview` a cada tentativa. |
 | Partes da roupa/pele ficaram pretas ou transparentes | A roupa tem tom parecido com o chroma. Diminua `--similaridade` (0.07, 0.05). Se não resolver, esse vídeo precisa de keying manual em um editor (Etapa 0 manual acima). |
+| Um objeto (ventilador, móvel, cabo) apareceu no resultado final | Se o objeto está **sobre o fundo verde** e o(a) intérprete nunca o encobre, o programa o cobre com preto sozinho — rode de novo e confira o `--preview`. Se o(a) intérprete passa na frente do objeto em algum momento, aparece um `atenção:` no terminal e não há como removê-lo automaticamente: reposicione a câmera/objeto e grave de novo, ou faça a Etapa 0 manual. |
+| Apareceu `fundo verde: cobre ~X% do quadro` | Informativo, não é erro: o fundo verde não cobre o quadro todo, então o recorte foi limitado à área do chroma (o que está fora dele — paredes, porta — não tem como virar preto). Se o recorte ficou apertado demais, afaste a câmera ou use um fundo verde maior na próxima gravação. |
 | O fundo não é verde/azul e apareceu no resultado | Sem chroma não há como remover o fundo automaticamente — o recorte funciona, mas o fundo original é mantido. Se um fundo preto for necessário, grave com chroma ou faça a Etapa 0 manual. |
 
 </details>
