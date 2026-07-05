@@ -301,6 +301,7 @@ Se estiver tudo certo, você verá uma linha começando com `OK:`. Se houver um 
 | Aparece um `aviso:` sobre "letterbox" e uma pergunta `[s/N]` | O vídeo não está no formato vertical esperado. Veja a seção [Se aparecer um aviso sobre o formato do vídeo](#se-aparecer-um-aviso-sobre-o-formato-do-vídeo) acima — ou faça a [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter) da próxima vez para evitar esse aviso. |
 | A tela fica "travada" por um tempo | É normal em vídeos longos — apenas espere. Só se preocupe se passarem muitos minutos sem nenhuma mudança. |
 | Aparece `Sucesso!` mas depois `FALHOU:` | A conversão terminou mas a checagem final encontrou um problema no arquivo gerado. Tente rodar de novo; se persistir, guarde a mensagem completa de erro para pedir ajuda. |
+| Um erro ou resultado estranho vindo do `pyBRAS_preparador_video.py` (preparador experimental) | Veja a tabela "Problemas comuns do preparador" dentro do bloco experimental da [Etapa 0](#etapa-0-recomendada-preparar-o-vídeo-em-um-software-de-edição-premiere-davinci-resolve-after-effects-media-composer-etc-antes-de-converter). Em último caso, faça a Etapa 0 manual ou pule direto para o conversor. |
 
 ---
 
